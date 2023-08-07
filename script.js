@@ -2,14 +2,12 @@ document.addEventListener('load', ()=>{
     updateTask();
 })
   
-//Name the DOM elements for toggle button, sidebar, flex-box, searchbar, dbObjectFavList, and dbLastInput
+//DOM elements for toggle button, sidebar, flex-box, searchbar, dbObjectFavList, and dbLastInput
 
  const toggleButton = document.getElementById("toggle-sidemenu");
  const sidebar = document.getElementById("sidebar");
  const flexBox = document.getElementById('flex-box');
  const searchbar = document.getElementById('search-bar');
-
-// Check and initialize the local storage items for favorite list and last input
 
  const dbObjectFavList = "favouritesList";
  if (localStorage.getItem(dbObjectFavList) == null) {
@@ -30,13 +28,7 @@ function updateTask() {
 }
 
 
-/**
- * Check if an ID is in a list of favorites
- *
- * @param list The list of favorites
- * @param id The ID to check
- * @return true if the ID is in the list, false otherwise
- */
+// Check if an ID is in a list of favorites
 
  function isFav(list, id) {
     let res = false;
@@ -56,10 +48,8 @@ function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
 }
 
-/**
- * Generates a random character string starting 
- * @returns {string} The generated string
- */
+// Generates a random character string starting 
+
  function generateOneCharString() {
     var possible = "abcdefghijklmnopqrstuvwxyz";
     return possible.charAt(Math.floor(Math.random() * possible.length));
@@ -67,11 +57,8 @@ function truncate(str, n) {
 
 
 
-/**
- * Function to toggle the sidebar and display the list of favorite meals.
- * When the toggle button is clicked, the sidebar is shown or hidden and the list of favorite meals is displayed.
- * The flexBox class is also toggled to adjust the layout of the page.
-*/
+//Function to toggle the sidebar and display the list of favorite meals.
+ 
 toggleButton.addEventListener("click", function () {
     showFavMealList();
     sidebar.classList.toggle("show");
@@ -79,14 +66,9 @@ toggleButton.addEventListener("click", function () {
 });
 
 
-/**
- * 
- * This function adds an event listener to the toggle button that when clicked, it calls the showFavMealList function and adds or removes the "show" class to the sidebar element and "shrink" class to the flexBox element, respectively.
- * @event toggleButton - The button element that when clicked, triggers the event listener.
- * @function showFavMealList - The function that is called when the toggle button is clicked. It populates the fav element with the list of favorite meals.
- * @element sidebar - The sidebar element that has the "show" class added or removed.
- * @element flexBox - The flexbox element that has the "shrink" class added or removed.
-*/
+//showFavMealList function 
+// adds or removes the "show" class to the sidebar element 
+// "shrink" class to the flexBox element, respectively.
 
 flexBox.onscroll = function () {
 
@@ -99,14 +81,7 @@ flexBox.onscroll = function () {
 };
 
 
-/**
- * Fetch meals from API
- * 
- * @param {string} url - The base URL for the API
- * @param {string} value - The value to append to the URL for filtering the results
- * 
- * @returns {Promise} A promise that resolves to the JSON data of the meals
- */
+// Fetch meals from API
 
 const fetchMealsFromApi = async (url, value) => {
     const response = await fetch(`${url + value}`);
@@ -115,15 +90,8 @@ const fetchMealsFromApi = async (url, value) => {
 }
 
 
-/**
- * showMealList - function to show meal list based on search input
- * 
- * @returns {void} 
- * 
- * This function first retrieves the data from local storage and then it fetches the meals data from API 
- * using the fetchMealsFromApi function. It then maps over the meals data and creates the HTML template 
- * for each meal. This HTML template is then added to the DOM.
- */
+// showMealList - function to show meal list based on search input
+
 
 async function showMealList() {
     const list = JSON.parse(localStorage.getItem(dbObjectFavList));
@@ -173,14 +141,8 @@ async function showMealList() {
 
 
 
-/**
- * addRemoveToFavList - function to add or remove a meal from the favorite list
- * 
- * @param {string} id - The id of the meal to be added or removed
- *
- * This function first retrieves the data from local storage and then it checks if the provided meal id already exist in the favorite list.
- * If it exists, it removes it from the list, otherwise it adds it to the list. It then updates the local storage and updates the UI.
- */
+// addRemoveToFavList - function to add or remove a meal from the favorite list
+
 
 function addRemoveToFavList(id) {
     const detailsPageLikeBtn = document.getElementById('like-button');
@@ -211,13 +173,8 @@ function addRemoveToFavList(id) {
 }
 
 
-/**
- * Show details for a specific meal
- * @async
- * @function
- * @param {string} itemId - The ID of the meal to show details for
- * @param {string} searchInput - The search input used to fetch the related meals
- */
+// Show details for a specific meal
+
  
 async function showMealDetails(itemId, searchInput) {
     console.log("searchInput:...............", searchInput);
@@ -336,22 +293,7 @@ async function showMealDetails(itemId, searchInput) {
 
 
 
-/**
-
-This function is used to show all the meals which are added to the favourite list.
-
-@function
-
-@async
-
-@returns {string} html - This returns html which is used to show the favourite meals.
-
-@throws {Error} If there is no favourite meal then it will show "Nothing To Show....."
-
-@example
-
-showFavMealList()
-*/
+//  function is used to show all the meals which are added to the favourite list.
 async function showFavMealList() {
     let favList = JSON.parse(localStorage.getItem(dbObjectFavList));
     let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
