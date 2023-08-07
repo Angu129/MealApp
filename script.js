@@ -50,14 +50,8 @@ function updateTask() {
 
 
 
-/**************************** Some Usefull Utility Function***************************** */
 
- /**
-  * It return truncated string greater then 50
-  * @param {*} str 
-  * @param {*} n 
-  * @returns 
-  */
+// It return truncated string greater then 50
 function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
 }
@@ -77,7 +71,6 @@ function truncate(str, n) {
  * Function to toggle the sidebar and display the list of favorite meals.
  * When the toggle button is clicked, the sidebar is shown or hidden and the list of favorite meals is displayed.
  * The flexBox class is also toggled to adjust the layout of the page.
- * 
 */
 toggleButton.addEventListener("click", function () {
     showFavMealList();
@@ -403,5 +396,4 @@ async function showFavMealList() {
 
 
 updateTask();
-/************************************** End Of the Code ****************************************** */
 
